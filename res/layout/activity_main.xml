@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    
+<!--     Boutons de connexion -->
+    
+     <LinearLayout 
+      	android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+    <LinearLayout 
+      	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		<Button
+	        android:id="@+id/btnConnect"
+	        android:layout_width="0dp"
+	        android:layout_weight="50"
+	        android:layout_height="40dp"   
+	        android:onClick="onClickConnect"   
+	        android:text="@string/btnConnect" >		        
+	    </Button>       
+	    <Button
+	        android:id="@+id/btnDeco"
+	        android:layout_width="0dp"
+	        android:layout_weight="50"
+	        android:layout_height="40dp"      
+	        android:onClick="onClickStop"
+	        android:text="@string/btnDeco" >
+	    </Button>
+    </LinearLayout>
+    
+     <TextView 
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv" />
+    
+    </LinearLayout>
+    
+  
+     
+     
+     
+     
+<!--      BLANC -->
+     <LinearLayout
+         android:layout_width="fill_parent"
+         android:layout_height="0dp"
+         android:layout_weight="70"
+         android:orientation="horizontal" >
+
+    </LinearLayout>
+    
+    
+<!--     Layout pour les 2 groupements de boutons -->
+    <FrameLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+        
+<!--     Layout pour les boutons Direction -->
+    <LinearLayout 
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|left" >
+        
+        <TextView 
+        android:id="@+id/tvDir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvDir" />
+           
+<!--         entete de connexion/deconnexion -->
+
+	<!--         1ere ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp">
+		    </LinearLayout>
+	        
+		    <Button
+		        android:id="@+id/btnUp"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"      
+		        android:onClick="onClickUp"
+		        android:text="@string/btnUp" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp">
+		    </LinearLayout>
+		    
+	    </LinearLayout>
+	    
+<!-- 	    2eme ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <Button
+		        android:id="@+id/btnLeft"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        android:onClick="onClickLeft"
+		        android:text="@string/btnLeft" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+		    
+		    <Button
+		        android:id="@+id/btnRight"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        android:onClick="onClickRight"
+		        android:text="@string/btnRight" >
+		    </Button>
+	    </LinearLayout>
+	    
+<!-- 	    3eme ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+	        
+		    <Button
+		        android:id="@+id/btnDown"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        
+		        android:onClick="onClickDown"
+		        android:text="@string/btnDown" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+		    
+	    </LinearLayout>
+    </LinearLayout>   
+        
+    
+    
+    
+    
+    
+<!--     Layout pour les boutons Tourelle -->
+    <LinearLayout 
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|right" >
+        
+        <TextView 
+        android:id="@+id/tvTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvTour" />
+           
+<!--         entete de connexion/deconnexion -->
+
+	<!--         1ere ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+	        
+		    <Button
+		        android:id="@+id/btnUpTour"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"      
+		        android:onClick="onClickUpTour"
+		        android:text="@string/btnUp" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+		    
+	    </LinearLayout>
+	    
+<!-- 	    2eme ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <Button
+		        android:id="@+id/btnLeftTour"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        android:onClick="onClickLeftTour"
+		        android:text="@string/btnLeft" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+		    
+		    <Button
+		        android:id="@+id/btnRightTour"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        android:onClick="onClickRightTour"
+		        android:text="@string/btnRight" >
+		    </Button>
+	    </LinearLayout>
+	    
+<!-- 	    3eme ligne -->
+	    <LinearLayout 
+       	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+	        
+		    <Button
+		        android:id="@+id/btnDownTour"
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="40dp"
+		        
+		        android:onClick="onClickDownTour"
+		        android:text="@string/btnDown" >
+		    </Button>
+		    
+		    <LinearLayout 
+		        android:layout_width="0dp"
+		        android:layout_weight="30"
+		        android:layout_height="fill_parent">
+		    </LinearLayout>
+		    
+	    </LinearLayout>
+    </LinearLayout>   
+    </FrameLayout>
+    
+    
+
+
+    
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Test Socket Client</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btnUp">^</string>
+    <string name="btnLeft">&lt;</string>
+    <string name="btnRight">&gt;</string>
+    <string name="btnDown">v</string>
+    <string name="btnConnect">Connexion</string>
+    <string name="btnDeco">Déco</string>
+    <string name="tv">Click on Connect</string>
+    <string name="tvTour">Tourelle</string>
+    <string name="tvDir">Direction</string>
+
+</resources>

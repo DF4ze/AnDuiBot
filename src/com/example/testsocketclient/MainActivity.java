@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 
 
 		// Instanciation du controleur
-		_c = new Controleur();
+		_c = new Controleur( this );
 		
 		// déclaration des listeners Direction
 		Button btnDirUp = (Button) findViewById(R.id.btnUp);
@@ -95,16 +95,24 @@ public class MainActivity extends Activity {
 	// Lors de la demande de connexion au socket
 	public void onClickConnect(View view) {
 		
-		// On demande au controleur de démarrer le thread seulement si on n'est pas deja connecté
-		if( _e == null )
-			_e = _c.startThreadClient();
-		
-		// Affichage si nous sommes connectés ou pas.
 		TextView tv = (TextView) findViewById(R.id.tv);
-		if( _e != null )
-			tv.setText("Connected");
-		else
-			tv.setText("Error Connecting");
+		
+		// mise à jour du modele avec l'IP de l'edittext
+		if( _c.majIP() ){
+		
+			// On demande au controleur de démarrer le thread seulement si on n'est pas deja connecté
+			if( _e == null )
+				_e = _c.startThreadClient();
+			
+			// Affichage si nous sommes connectés ou pas.
+			if( _e != null )
+				tv.setText("Connected");
+			else
+				tv.setText("Error Connecting");
+		}else{
+			tv.setText("Wrong IP:PORT");
+			
+		}
 			
 	}
 

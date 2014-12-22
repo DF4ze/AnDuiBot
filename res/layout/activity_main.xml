@@ -95,8 +95,7 @@
 		        android:id="@+id/btnUp"
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
-		        android:layout_height="40dp"      
-		        android:onClick="onClickUp"
+		        android:layout_height="40dp"
 		        android:text="@string/btnUp" >
 		    </Button>
 		    
@@ -118,7 +117,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        android:onClick="onClickLeft"
 		        android:text="@string/btnLeft" >
 		    </Button>
 		    
@@ -133,7 +131,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        android:onClick="onClickRight"
 		        android:text="@string/btnRight" >
 		    </Button>
 	    </LinearLayout>
@@ -154,8 +151,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        
-		        android:onClick="onClickDown"
 		        android:text="@string/btnDown" >
 		    </Button>
 		    
@@ -203,8 +198,7 @@
 		        android:id="@+id/btnUpTour"
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
-		        android:layout_height="40dp"      
-		        android:onClick="onClickUpTour"
+		        android:layout_height="40dp"  
 		        android:text="@string/btnUp" >
 		    </Button>
 		    
@@ -226,7 +220,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        android:onClick="onClickLeftTour"
 		        android:text="@string/btnLeft" >
 		    </Button>
 		    
@@ -241,7 +234,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        android:onClick="onClickRightTour"
 		        android:text="@string/btnRight" >
 		    </Button>
 	    </LinearLayout>
@@ -262,8 +254,6 @@
 		        android:layout_width="0dp"
 		        android:layout_weight="30"
 		        android:layout_height="40dp"
-		        
-		        android:onClick="onClickDownTour"
 		        android:text="@string/btnDown" >
 		    </Button>
 		    

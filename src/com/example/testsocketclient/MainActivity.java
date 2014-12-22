@@ -33,7 +33,11 @@ import modeles.dao.communication.beansactions.IAction;
 import modeles.dao.communication.beansactions.TourelleAction;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.TextView;
 import controleur.Controleur;
 import controleur.socketclient.Emission;
@@ -43,6 +47,16 @@ public class MainActivity extends Activity {
 	// Attribut Controleur et Emission via socket
 	private Controleur _c;
 	private Emission _e;
+	private int maxPWM = 255;
+	private int posX = 90;
+	private int posY = 90;
+	private int delta = 5;
+	private int minServo = 0;
+	private int maxServo = 180;
+	
+	final Handler h = new Handler();
+	private MyTask task;
+	private int delay = 125;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +67,29 @@ public class MainActivity extends Activity {
 
 		// Instanciation du controleur
 		_c = new Controleur();
+		
+		// déclaration des listeners Direction
+		Button btnDirUp = (Button) findViewById(R.id.btnUp);
+		Button btnDirRight = (Button) findViewById(R.id.btnRight);
+		Button btnDirDown = (Button) findViewById(R.id.btnDown);
+		Button btnDirLeft = (Button) findViewById(R.id.btnLeft);
+		
+		btnDirUp.setOnTouchListener( onClickUp );
+		btnDirRight.setOnTouchListener( onClickRight );
+		btnDirDown.setOnTouchListener( onClickDown );
+		btnDirLeft.setOnTouchListener( onClickLeft );
+		
+		// déclaration des listeners Tourelle
+		Button btnTourUp = (Button) findViewById(R.id.btnUpTour);
+		Button btnTourRight = (Button) findViewById(R.id.btnRightTour);
+		Button btnTourDown = (Button) findViewById(R.id.btnDownTour);
+		Button btnTourLeft = (Button) findViewById(R.id.btnLeftTour);
+		
+		btnTourUp.setOnTouchListener( onClickUpTour );
+		btnTourRight.setOnTouchListener( onClickRightTour );
+		btnTourDown.setOnTouchListener( onClickDownTour );
+		btnTourLeft.setOnTouchListener( onClickLeftTour );
+		
 	}
 
 	// Lors de la demande de connexion au socket
@@ -90,65 +127,215 @@ public class MainActivity extends Activity {
 	
 	
 	// Partie Direction
+	public OnTouchListener  onClickUp = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			DirectionAction ad = null;
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+		    	ad = new DirectionAction(0, maxPWM, IAction.prioHight);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	ad = new DirectionAction(0, 0, IAction.prioHighest);
+		    	break;
+		    }
+		    
+			if( _e != null )
+			_e.addAction(ad);
+		    return true;
+		}
+	};
+
+	public OnTouchListener onClickDown = new OnTouchListener() {
+		public boolean onTouch( View yourButton , MotionEvent theMotion) {
+			DirectionAction ad = null;
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+		    	ad = new DirectionAction(0, -maxPWM, IAction.prioHight);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	ad = new DirectionAction(0, 0, IAction.prioHighest);
+		    	break;
+		    }
+		    
+			if( _e != null )
+			_e.addAction(ad);
+		    return true;
+		}
+	};
+
+	public OnTouchListener onClickRight = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			DirectionAction ad = null;
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+		    	ad = new DirectionAction(maxPWM, 0, IAction.prioHight);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	ad = new DirectionAction(0, 0, IAction.prioHighest);
+		    	break;
+		    }
+		    
+			if( _e != null )
+			_e.addAction(ad);
+		    return true;
+		}
+	};
+
+	public OnTouchListener onClickLeft = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			DirectionAction ad = null;
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+		    	ad = new DirectionAction(-maxPWM, 0, IAction.prioHight);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	ad = new DirectionAction(0, 0, IAction.prioHighest);
+		    	break;
+		    }
+		    
+			if( _e != null )
+			_e.addAction(ad);
+		    return true;
+		}
+
+	};
 	
-	public void onClickUp(View view) {
-		DirectionAction ad = new DirectionAction(127, 0, IAction.prioHight);
-		if( _e != null )
-		_e.addAction(ad);
-	}
+	
+	
+	
+	
 
-	public void onClickDown(View view) {
-		DirectionAction ad = new DirectionAction(-127, 0, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
+	// Partie Tourelle    
+    
+	public OnTouchListener onClickUpTour = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+				task = new MyTask( delta, "Y" );
+		    	h.postDelayed(task, delay);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	task.stop();
+		    	break;
+		    }
+		    
 
-	public void onClickRight(View view) {
-		DirectionAction ad = new DirectionAction(0, 127, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
+		    return true;
+		}
 
-	public void onClickLeft(View view) {
-		DirectionAction ad = new DirectionAction(0, -127, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
+	};
+
+	
+	public OnTouchListener onClickDownTour = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+				task = new MyTask( -delta, "Y" );
+		    	h.postDelayed(task, delay);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	task.stop();
+		    	break;
+		    }
+		    return true;
+		}
+
+	};
+
+	
+	public OnTouchListener onClickRightTour = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+				task = new MyTask( delta, "X" );
+		    	h.postDelayed(task, delay);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	task.stop();
+		    	break;
+		    }
+		    return true;
+		}
+
+	};
 
 
-	// Partie Tourelle
-	public void onClickUpTour(View view) {
-		TourelleAction ad = new TourelleAction(127, 0, IAction.prioHight);
-		if( _e != null )
-		_e.addAction(ad);
-	}
+	public OnTouchListener onClickLeftTour = new OnTouchListener() {
+		public boolean onTouch(View yourButton , MotionEvent theMotion) {
+			switch ( theMotion.getAction() ) {
+		    case MotionEvent.ACTION_DOWN: 
+				task = new MyTask( -delta, "X" );
+		    	h.postDelayed(task, delay);
+		    	break;
+		    case MotionEvent.ACTION_UP: 
+		    	task.stop();
+		    	break;
+		    }
+		    return true;
+		}
 
-	public void onClickDownTour(View view) {
-		TourelleAction ad = new TourelleAction(-127, 0, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
+	};
 
-	public void onClickRightTour(View view) {
-		TourelleAction ad = new TourelleAction(0, 127, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
-
-	public void onClickLeftTour(View view) {
-		TourelleAction ad = new TourelleAction(0, -127, IAction.prioHight);
-		
-		if( _e != null )
-		_e.addAction(ad);
-	}
 
 	
 
+	class MyTask implements Runnable{
+		 
+		public int move;
+		public String axis;
+		public boolean repeat = true;
+		
+		public MyTask(){
+			
+		}
+		
+		public MyTask( int m, String a ){
+			setMove(m);
+			setAxis(a);
+		}
+		
+		public void setMove( int m ){
+			move = m;
+		}
+		public void setAxis( String a ){
+			axis = a;
+		}
+		public void stop(){
+			repeat = false;
+		}
+       
+        public void run(){
+        	if( axis.equals("x") || axis.equals("X") )
+        		posX += move;
+        	else if( axis.equals("y") || axis.equals("Y") )
+        		posY += move;
+        	
+        	if( posX > maxServo ){
+        		posX = maxServo;
+        		repeat = false;
+        	}else if( posX < minServo ){
+        		posX = minServo;
+        		repeat = false;
+        	}
+        	if( posY > maxServo ){
+        		posY = maxServo;
+        		repeat = false;
+        	}else if( posY < minServo ){
+        		posY = minServo;
+        		repeat = false;
+        	}       	
+        	
+			TourelleAction ad = new TourelleAction(posX, posY, IAction.prioHight);
+			_e.addAction(ad);
+
+        	
+        	if( repeat )
+        		h.postDelayed(this, delay);
+        	
+        	repeat = true;
+        }
+    }
 }
 
 
